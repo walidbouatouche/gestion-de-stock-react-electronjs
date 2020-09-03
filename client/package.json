@@ -1,5 +1,5 @@
 {
-  "name": "el",
+  "name": "StokApp",
   "version": "0.1.0",
   "private": true,
   "description": "your project description",
@@ -17,15 +17,23 @@
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
+    "@types/react-redux": "^7.1.9",
+    "@types/react-router-dom": "^5.1.5",
+    "@types/yup": "^0.29.6",
+    "axios": "^0.19.2",
     "cross-env": "^7.0.2",
     "electron-is-dev": "^1.2.0",
+    "formik": "^2.1.4",
     "metro4-react": "^0.1.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-redux": "^7.2.1",
     "react-scripts": "3.4.3",
+    "redux": "^4.0.5",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.3.0",
     "typescript": "~3.7.2",
-    "axios": "^0.19.2" ,
-    "@types/react-router-dom": "^5.1.5"
+    "yup": "^0.28.3"
   },
   "scripts": {
     "react-start": "react-scripts start",
