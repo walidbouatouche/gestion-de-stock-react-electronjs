@@ -32,10 +32,9 @@ const Home = () => {
                 </div>
             </ul>
                         
-                        
+
            {  productById && productById[0].productId }
            {  loading && "loading" }
-            
            {  error &&  error }
         
         </div>
@@ -52,7 +51,7 @@ const Menu = ({ menu }: any) => {
         menu.map((item: any) => (
             <li key={item.id} className="w3-padding-16 w3-margin  w3-hover-grayscale">
 
-                <Link className="w3-padding" to={'list/' + item.id}>
+                <Link className="w3-padding" to={'/' + item.id}>
                     <img src={item.imguri} alt="Image" className="w3-left w3-margin-right  " style={{ width: '50px' }} />
                     <span className="w3-large w3-text-black"> {item.title}</span>
                     <br />
