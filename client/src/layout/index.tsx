@@ -1,19 +1,17 @@
 import React, { Component } from 'react'
-
-//The main layout that appears on all pages
+ //The main layout that appears on all pages
 const Layout = ({ children }: any) => {
     return (
-        <div >
-
-            <div className="w3-row">
-                <div className="w3-col   w3-margin-top">
-                    <br />
+        
+                <div   className="  w3-top">
+                  <a className="w3-button w3-orange" href="/">Home</a>
                     {children}
-                </div>
-                {/* <Rightside /> */}
-            </div>
 
-        </div>
+                 </div>
+             
+         
+
+         
     );
 
 }

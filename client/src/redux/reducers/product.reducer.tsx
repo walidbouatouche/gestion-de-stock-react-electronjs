@@ -6,16 +6,36 @@ export function product(state = {}, action: any) {
 
         case productConstants.GET_PRODUCT_BY_ID_REQUEST:
             return {
+                ...state,
                 loading: true
             };
 
         case productConstants.GET_PRODUCT_BY_ID_SUCCESS:
             return {
-               productById: action.product.data
+                ...state,
+                productById: action.product.data
             }
 
         case productConstants.GET_PRODUCT_BY_ID_FAILURE:
             return {
+                ...state,
+                error: action.error
+            }
+        case productConstants.GET_PRODUCTS_REQUEST:
+            return {
+                ...state,
+                loading: true
+            };
+
+        case productConstants.GET_PRODUCTS_SUCCESS:
+            return {
+                ...state,
+                products: action.product.data
+            }
+
+        case productConstants.GET_PRODUCTS_FAILURE:
+            return {
+                ...state,
                 error: action.error
             }
         default:

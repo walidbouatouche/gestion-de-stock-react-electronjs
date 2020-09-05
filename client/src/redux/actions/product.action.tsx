@@ -3,7 +3,8 @@ import { productConstants } from '../constants/product.constants'
 
 export const productAction = {
 
-    getProductByid
+    getProductByid,
+    getProducts
 
 }
 
@@ -18,7 +19,7 @@ function getProductByid(id: any) {
             method: 'GET',
             url: `/product/getproductbyid/${id}`,
 
-        }).then(product=> {
+        }).then(product => {
 
             dispatch({
                 type: productConstants.GET_PRODUCT_BY_ID_SUCCESS,
@@ -28,6 +29,34 @@ function getProductByid(id: any) {
         }, ({ response }) => {
             dispatch({
                 type: productConstants.GET_PRODUCT_BY_ID_FAILURE,
+                error: (response != undefined && response != null) ? response.data.message : "somthing wrong"
+
+            })
+        })
+    }
+}
+
+function getProducts() {
+
+    return (dispatch: any) => {
+        dispatch({
+            type: productConstants.GET_PRODUCTS_REQUEST,
+        })
+
+        return sendRequest({
+            method: 'GET',
+            url: `/product/getproducts/`,
+
+        }).then(product => {
+
+            dispatch({
+                type: productConstants.GET_PRODUCTS_SUCCESS,
+                product
+            })
+
+        }, ({ response }) => {
+            dispatch({
+                type: productConstants.GET_PRODUCTS_FAILURE,
                 error: (response != undefined && response != null) ? response.data.message : "somthing wrong"
 
             })

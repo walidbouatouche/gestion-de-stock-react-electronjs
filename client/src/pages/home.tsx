@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { productAction } from '../redux/actions/product.action';
 
 import { useSelector, useDispatch } from 'react-redux'
+import Layout from '../layout'
 const Home = () => {
 
     const  loading= useSelector( (state: any) => state.product. loading);
@@ -18,12 +19,12 @@ const Home = () => {
     }, [])
 
     return (
-        <div className="w3-white w3-margin">
-
+        <Layout >
+ 
             <ul className="w3-ul w3-hoverable w3-white">
                 <div className="w3-white w3-margin">
                     <div className="w3-container w3-padding-16  w3-orange text-white">
-                        <span className="w3-padding-16  w3-orange w3-text-white">Offres d'emploi par fonction</span>
+                        <span className="w3-padding-16  w3-orange w3-text-white">Menu</span>
                     </div>
                     <ul className="w3-ul w3-hoverable w3-white ">
 
@@ -36,9 +37,8 @@ const Home = () => {
            {  productById && productById[0].productId }
            {  loading && "loading" }
            {  error &&  error }
-        
-        </div>
-
+       
+        </Layout>
     )
 
 }

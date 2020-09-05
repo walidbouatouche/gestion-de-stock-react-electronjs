@@ -10,8 +10,8 @@ mainWindow = new BrowserWindow({
       height: 680,
      minimizable:false,
      maximizable:false,
-     icon: path.join(__dirname, './favicon.ico')
-
+     icon: path.join(__dirname, './favicon.ico') ,
+    resizable:false
      
     });
     mainWindow.setMenuBarVisibility(false)
