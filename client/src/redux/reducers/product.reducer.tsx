@@ -38,6 +38,23 @@ export function product(state = {}, action: any) {
                 ...state,
                 error: action.error
             }
+            case productConstants.ADD_PRODUCT_REQUEST:
+                return {
+                    ...state,
+                    loading: true
+                };
+    
+            case productConstants.ADD_PRODUCT_SUCCESS:
+                return {
+                    ...state,
+            
+                }
+    
+            case productConstants.ADD_PRODUCT_FAILURE:
+                return {
+                    ...state,
+                    error: action.error
+                }
         default:
             return state;
     }

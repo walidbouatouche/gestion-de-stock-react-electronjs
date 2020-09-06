@@ -4,7 +4,8 @@ import { productConstants } from '../constants/product.constants'
 export const productAction = {
 
     getProductByid,
-    getProducts
+    getProducts ,
+    addProduct
 
 }
 
@@ -57,6 +58,31 @@ function getProducts() {
         }, ({ response }) => {
             dispatch({
                 type: productConstants.GET_PRODUCTS_FAILURE,
+                error: (response != undefined && response != null) ? response.data.message : "somthing wrong"
+
+            })
+        })
+    }
+}
+function addProduct(data:any) {
+
+    return (dispatch: any) => {
+        dispatch({
+            type: productConstants.ADD_PRODUCT_REQUEST,
+        })
+
+        return sendRequest({
+            method: 'POST',
+            url: `/product/addproduct/`,
+            data
+
+        }).then(()=> {
+
+            dispatch(getProducts())
+
+        }, ({ response }) => {
+            dispatch({
+                type: productConstants.ADD_PRODUCT_FAILURE,
                 error: (response != undefined && response != null) ? response.data.message : "somthing wrong"
 
             })

@@ -1,22 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import menu from '../static/menu.json'
 import { Link } from 'react-router-dom'
-import { productAction } from '../redux/actions/product.action';
-
-import { useSelector, useDispatch } from 'react-redux'
+ 
+ 
 import Layout from '../layout'
 const Home = () => {
 
-    const  loading= useSelector( (state: any) => state.product. loading);
-    const productById = useSelector( (state: any) => state.product.productById);
-    const  error= useSelector( (state: any) => state.product. error);
-
-    const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch(productAction.getProductByid(1))
-        
-
-    }, [])
+ 
+ 
 
     return (
         <Layout >
@@ -34,9 +25,7 @@ const Home = () => {
             </ul>
                         
 
-           {  productById && productById[0].productId }
-           {  loading && "loading" }
-           {  error &&  error }
+  
        
         </Layout>
     )

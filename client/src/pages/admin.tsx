@@ -31,11 +31,17 @@ const ProductAdmin = () => {
 
     }, [])
     const _addProduct = (productData: any) => {
-        alert("Data is :" + JSON.stringify(productData))
+  
+        delete productData.productId
+ dispatch(productAction.addProduct(productData))
+ let modelBox = document.getElementById("id01") as HTMLInputElement;
+ modelBox.style.display = "none"
 
     }
     const _editProduct = (productData: any) => {
         alert("Data is :" + JSON.stringify(productData))
+        let modelBox = document.getElementById(productData.productId) as HTMLInputElement;
+        modelBox.style.display = "none"
 
     }
     const _deleteProduct = (id: any) => {
@@ -47,7 +53,7 @@ const ProductAdmin = () => {
 
     }
     return (
-        <div>
+        <div >
             <Layout>
 
 
@@ -78,20 +84,20 @@ const ProductList = ({ allProducts, deleteProduct, addProduct,editProduct }: any
         addProduct(productData)
     }
     const _getProductInfoE = (productData: any) => {
-        addProduct(productData)
+        editProduct(productData)
     }
     
     return (<>
 
 
 
-        <div className="w3-margin">
+        <div className="w3-margin w3-center">
             <p>
                 <Model id={'id01'} title={<FontAwesomeIcon icon={faPlus} />}>
                     <AddEditForm getProductInfo={_getProductInfo} />
                 </Model>
             </p>
-            <table className="w3-table-all w3-width w3-margin-top w3-margin">
+            <table className="w3-table-all w3-width w3-margin-top ">
 
                 <thead>
                     <tr className="w3-orange w3-text-white">
@@ -150,7 +156,7 @@ const AddEditForm = ({ productInfo, getProductInfo }: any) => {
                         productId: productInfo?.productId || '',
                         title: productInfo?.productName || '',
                         description: productInfo?.description || '',
-                        Qty: productInfo?.productQty || 1
+                        Qty: 0
 
 
                     }}
@@ -192,10 +198,10 @@ const AddEditForm = ({ productInfo, getProductInfo }: any) => {
 
                             <div >
                                 <br />
-                                <label htmlFor="Qty">Qty  actuel: 10  </label>< br />
-                                <label htmlFor="Qty">  new Qty </label>
+                                <label htmlFor="Qty">Qty  actuel: {productInfo && productInfo.productQty } </label>< br />
+                  
 
-                                <Field name="Qty" type="number" className={'w3-input w3-border' + (errors.Qty && touched.Qty ? ' w3-border w3-border-red' : '')} >
+                                + <Field name="Qty" type="number" className={'w3-input w3-border' + (errors.Qty && touched.Qty ? ' w3-border w3-border-red' : '')} >
 
                                 </Field>
 
