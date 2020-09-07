@@ -16,7 +16,7 @@ exports.getProductById = (req, res, next) => {
 exports.getProducts = (req, res, next) => {
 
 
-    const QUERY = `SELECT * FROM product `
+    const QUERY = `SELECT * FROM product ORDER BY   productName `
     CON.query(QUERY, (err, result) => {
         if (err) _response(res, 401, { message: 'invalidRequest' });
         _response(res, 200, result)
@@ -89,5 +89,43 @@ exports.deleteProduct = (req, res, next) => {
     CON.query(QUERY, (err, result) => {
         if (err) _response(res, 401, { message: 'invalidRequest' });
         _response(res, 200, result)
+    })
+}
+
+exports.updateProduct = (req, res, next) => {
+
+    const d = new Date();
+    const date = d.getDate();
+    const month = d.getMonth() + 1; // Since getMonth() returns month from 0-11 not 1-12
+    const year = d.getFullYear();
+    const H = d.getHours();
+    const M = d.getMinutes();
+
+    const dateStr = date + "/" + month + "/" + year;
+    const timeNow = H + ":" + M
+    const { title, description, Qty, productId } = req.body;
+
+
+    const lastUpdate = dateStr + " " + timeNow
+    const productName = title;
+    const productQty = Qty;
+
+
+
+
+    const QUERY = ` 
+    UPDATE product SET
+    lastUpdate='${lastUpdate}',
+    productName='${productName}',
+    productQty='${productQty}',
+    description='${description}'
+    WHERE
+    productId ='${productId}'
+    `;
+
+    CON.query(QUERY, (error, result) => {
+        console.log(error)
+        if (error) _response(res, 400, { message: 'invalidRequest' });
+        _response(res, 200, { message: " succefully !!" })
     })
 }

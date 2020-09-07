@@ -55,6 +55,23 @@ export function product(state = {}, action: any) {
                 ...state,
                 error: action.error
             }
+        case productConstants.UPDATE_PRODUCT_REQUEST:
+            return {
+                ...state,
+                loading: true
+            };
+
+        case productConstants.UPDATE_PRODUCT_SUCCESS:
+            return {
+                ...state,
+
+            }
+
+        case productConstants.UPDATE_PRODUCT_FAILURE:
+            return {
+                ...state,
+                error: action.error
+            }
         case productConstants.DELETE_PRODUCT_REQUEST:
             return {
                 ...state,

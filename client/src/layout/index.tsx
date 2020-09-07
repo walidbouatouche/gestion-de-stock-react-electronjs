@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 const Layout = ({ children }: any) => {
     return (
         
-                <div   className="  w3-top">
+                <div  >
                   <div  className="w3-red">
                        
                   <a className="w3-button " href="/">

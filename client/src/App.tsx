@@ -2,32 +2,33 @@ import React, { useState } from 'react'
 import { Switch, BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
 import { Home } from './pages/home'
 import { store } from './helpers/store'
- import { Provider } from 'react-redux'
- import {ProductAdmin} from './pages/admin'
+import { Provider } from 'react-redux'
+import { ProductAdmin } from './pages/admin'
+import { Order } from './pages/order'
 const App = () => {
 
-    return (
+  return (
 
-        <Router >
-            <Switch>
+    <Router >
+      <Switch>
 
-                <Route path="/" exact component={Home} />
-                <Route path="/admin" exact component={ProductAdmin} />
-
-                <Redirect to="/" />
-            </Switch>
-        </Router>
-    )
+        <Route path="/" exact component={Home} />
+        <Route path="/admin" exact component={ProductAdmin} />
+        <Route path="/order" exact component={Order} />
+        <Redirect to="/" />
+      </Switch>
+    </Router>
+  )
 
 }
 
 const AppWithStore = () => {
-    return (
-      <Provider store={store}>
-        <App />
-      </Provider>
-    )
-  
-  }
-  
-  export default AppWithStore;
+  return (
+    <Provider store={store}>
+      <App />
+    </Provider>
+  )
+
+}
+
+export default AppWithStore;

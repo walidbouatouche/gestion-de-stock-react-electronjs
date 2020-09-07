@@ -6,8 +6,8 @@ const isDev = require("electron-is-dev");
 let mainWindow;
 function createWindow() {
 mainWindow = new BrowserWindow({
-     width: 900,
-      height: 680,
+     width: 1000,
+      height: 600,
      minimizable:false,
      maximizable:false,
      icon: path.join(__dirname, './favicon.ico') ,

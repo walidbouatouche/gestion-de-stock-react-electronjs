@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
 
-import { faEdit, faTrash, faPlus, faUser } from '@fortawesome/free-solid-svg-icons'
+import { faEdit, faTrash, faPlus, faUser, faPrint } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import Model from "../compenents/model";
@@ -13,7 +13,7 @@ import { productAction } from '../redux/actions/product.action';
 
 import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
- 
+
 
 const ProductAdmin = () => {
     const loading = useSelector((state: any) => state.product.loading);
@@ -29,17 +29,23 @@ const ProductAdmin = () => {
 
         dispatch(productAction.getProducts())
 
+
+
     }, [])
     const _addProduct = (productData: any) => {
 
         delete productData.productId
         dispatch(productAction.addProduct(productData))
+
+        // hide model of add page 
         let modelBox = document.getElementById("id01") as HTMLInputElement;
         modelBox.style.display = "none"
 
     }
     const _editProduct = (productData: any) => {
-        alert("Data is :" + JSON.stringify(productData))
+        dispatch(productAction.updateProduct(productData))
+
+        // hide model of addpage
         let modelBox = document.getElementById(productData.productId) as HTMLInputElement;
         modelBox.style.display = "none"
 
@@ -50,18 +56,18 @@ const ProductAdmin = () => {
             dispatch(productAction.deleteProduct(id))
 
         }
- 
-        //  setTimeout(() => {
-        //        var notification = new Notification(" zszz32z321 ");
-        // }, 4000);
+
     }
     return (
-        <div >
+        <div  >
             <Layout>
+
+
 
 
                 {products && <ProductList editProduct={_editProduct} deleteProduct={_deleteProduct} addProduct={_addProduct} allProducts={products} />
                 }
+
             </Layout>
         </div>
 
@@ -89,12 +95,19 @@ const ProductList = ({ allProducts, deleteProduct, addProduct, editProduct }: an
     const _getProductInfoE = (productData: any) => {
         editProduct(productData)
     }
+    const printProducts = () => {
+        var divToPrint = document.getElementById("printTable") as HTMLInputElement;
+      
+        window.document.write(divToPrint.outerHTML);
+        window.print();
+        window.location.reload()
+ 
+    }
 
     return (<>
 
 
-
-        <div className="w3-margin w3-center">
+        <div className="w3-margin w3-center" >
             <p>
                 <Model id={'id01'} title={<FontAwesomeIcon icon={faPlus} />}>
                     <AddEditForm getProductInfo={_getProductInfo} />
@@ -103,11 +116,11 @@ const ProductList = ({ allProducts, deleteProduct, addProduct, editProduct }: an
             <table className="w3-table-all w3-width w3-margin-top ">
 
                 <thead>
-                    <tr className="w3-orange w3-text-white">
+                    <tr className="w3-red w3-text-white">
                         <th> product</th>
                         <th>Edit</th>
                         <th> Remove</th>
-                        <th> Qty</th>
+                        <th> quantité</th>
                     </tr>
                 </thead>
 
@@ -142,13 +155,55 @@ const ProductList = ({ allProducts, deleteProduct, addProduct, editProduct }: an
                     )}
                 </tbody>
             </table>
+
+ { 
+ // only for print
+
+ }
+            <table    id="printTable" style={{border:"1px solid black"}}  className=" w3-hide">
+  <p >
+La listes des produis  
+  </p>
+<thead>
+    <tr style={{border:"1px solid black"}}   >
+        <th  style={{border:"1px solid black"}}>  product</th>
+     
+        <th  style={{border:"1px solid black"}}> quantité</th>
+    </tr>
+</thead>
+
+
+<tbody>
+    {allProducts.map((item: any) =>
+        <tr  style={{border:"1px solid black"}}  key={item.productId} >
+            <th  style={{border:"1px solid black"}}>{item.productName}</th>
+       
+          
+                <th  style={{border:"1px solid black"}}>{item.productQty}</th>
+
+         
+
+        </tr>
+    )}
+</tbody>
+</table>
+{ 
+ // only for print
+
+ }
+<br />
+            <button onClick={printProducts} className="w3-button w3-green "><FontAwesomeIcon icon={faPrint} /> </button>
         </div>
+ 
     </>)
 }
 
 
 
 const AddEditForm = ({ productInfo, getProductInfo }: any) => {
+
+    const [qty, setQty] = useState(productInfo?.productQty && productInfo.productQty)
+
 
     return (
         <div className="w3-center" >
@@ -175,9 +230,9 @@ const AddEditForm = ({ productInfo, getProductInfo }: any) => {
                     })}
                     onSubmit={(fields): any => {
 
+                        const newQty = (typeof qty === 'undefined') ? fields.Qty : fields.Qty + qty
 
-
-                        getProductInfo(fields)
+                        getProductInfo({ ...fields, Qty: newQty })
 
                     }}
                     render={({ errors, status, touched }) => (
@@ -201,7 +256,7 @@ const AddEditForm = ({ productInfo, getProductInfo }: any) => {
 
                             <div >
                                 <br />
-                                <label htmlFor="Qty">Qty  actuel: {productInfo && productInfo.productQty} </label>< br />
+                                <label htmlFor="Qty">Qty  actuel: {productInfo && qty} </label>< br />
 
 
                                 + <Field name="Qty" type="number" className={'w3-input w3-border' + (errors.Qty && touched.Qty ? ' w3-border w3-border-red' : '')} >
