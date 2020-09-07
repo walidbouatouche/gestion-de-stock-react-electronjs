@@ -13,7 +13,7 @@ import { productAction } from '../redux/actions/product.action';
 
 import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
-
+ 
 
 const ProductAdmin = () => {
     const loading = useSelector((state: any) => state.product.loading);
@@ -31,11 +31,11 @@ const ProductAdmin = () => {
 
     }, [])
     const _addProduct = (productData: any) => {
-  
+
         delete productData.productId
- dispatch(productAction.addProduct(productData))
- let modelBox = document.getElementById("id01") as HTMLInputElement;
- modelBox.style.display = "none"
+        dispatch(productAction.addProduct(productData))
+        let modelBox = document.getElementById("id01") as HTMLInputElement;
+        modelBox.style.display = "none"
 
     }
     const _editProduct = (productData: any) => {
@@ -46,11 +46,14 @@ const ProductAdmin = () => {
     }
     const _deleteProduct = (id: any) => {
         if (window.confirm("Are You sure")) {
-            alert(id)
+
+            dispatch(productAction.deleteProduct(id))
 
         }
-
-
+ 
+        //  setTimeout(() => {
+        //        var notification = new Notification(" zszz32z321 ");
+        // }, 4000);
     }
     return (
         <div >
@@ -73,7 +76,7 @@ const ProductAdmin = () => {
 
 
 
-const ProductList = ({ allProducts, deleteProduct, addProduct,editProduct }: any) => {
+const ProductList = ({ allProducts, deleteProduct, addProduct, editProduct }: any) => {
 
 
     const _deleteProduct = (id: any) => {
@@ -86,7 +89,7 @@ const ProductList = ({ allProducts, deleteProduct, addProduct,editProduct }: any
     const _getProductInfoE = (productData: any) => {
         editProduct(productData)
     }
-    
+
     return (<>
 
 
@@ -121,7 +124,7 @@ const ProductList = ({ allProducts, deleteProduct, addProduct,editProduct }: any
 
 
                                     }
-                                    <AddEditForm getProductInfo={_getProductInfoE} productInfo={item}/>                                </Model>
+                                    <AddEditForm getProductInfo={_getProductInfoE} productInfo={item} />                                </Model>
 
 
                             </th>
@@ -198,8 +201,8 @@ const AddEditForm = ({ productInfo, getProductInfo }: any) => {
 
                             <div >
                                 <br />
-                                <label htmlFor="Qty">Qty  actuel: {productInfo && productInfo.productQty } </label>< br />
-                  
+                                <label htmlFor="Qty">Qty  actuel: {productInfo && productInfo.productQty} </label>< br />
+
 
                                 + <Field name="Qty" type="number" className={'w3-input w3-border' + (errors.Qty && touched.Qty ? ' w3-border w3-border-red' : '')} >
 

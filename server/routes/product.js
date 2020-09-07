@@ -7,6 +7,7 @@ const productCtrl = require('../controllers/product')
 ROUTER.get('/getproductbyid/:productId', productCtrl.getProductById)
 ROUTER.get('/getproducts/', productCtrl.getProducts)
 ROUTER.post('/addproduct/', productCtrl.addProduct)
+ROUTER.delete('/deleteproduct/:productId', productCtrl.deleteProduct)
 module.exports = ROUTER;
 
 

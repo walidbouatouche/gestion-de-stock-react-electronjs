@@ -4,8 +4,9 @@ import { productConstants } from '../constants/product.constants'
 export const productAction = {
 
     getProductByid,
-    getProducts ,
-    addProduct
+    getProducts,
+    addProduct ,
+    deleteProduct
 
 }
 
@@ -64,7 +65,7 @@ function getProducts() {
         })
     }
 }
-function addProduct(data:any) {
+function addProduct(data: any) {
 
     return (dispatch: any) => {
         dispatch({
@@ -76,13 +77,39 @@ function addProduct(data:any) {
             url: `/product/addproduct/`,
             data
 
-        }).then(()=> {
+        }).then(() => {
 
             dispatch(getProducts())
 
         }, ({ response }) => {
             dispatch({
                 type: productConstants.ADD_PRODUCT_FAILURE,
+                error: (response != undefined && response != null) ? response.data.message : "somthing wrong"
+
+            })
+        })
+    }
+}
+
+function deleteProduct(productId: any) {
+
+    return (dispatch: any) => {
+        dispatch({
+            type: productConstants.DELETE_PRODUCT_REQUEST,
+        })
+
+        return sendRequest({
+            method: 'DELETE',
+            url: `/product/deleteproduct/${productId}`,
+
+
+        }).then(() => {
+            // here wwe do not need the seccus action
+            dispatch(getProducts())
+
+        }, ({ response }) => {
+            dispatch({
+                type: productConstants.DELETE_PRODUCT_FAILURE,
                 error: (response != undefined && response != null) ? response.data.message : "somthing wrong"
 
             })
