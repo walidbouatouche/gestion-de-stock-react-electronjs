@@ -6,8 +6,9 @@ export const productAction = {
     getProductByid,
     getProducts,
     addProduct,
-    deleteProduct ,
-    updateProduct
+    deleteProduct,
+    updateProduct ,
+    getProductsNeed
 
 }
 
@@ -138,6 +139,35 @@ function deleteProduct(productId: any) {
         }, ({ response }) => {
             dispatch({
                 type: productConstants.DELETE_PRODUCT_FAILURE,
+                error: (response != undefined && response != null) ? response.data.message : "somthing wrong"
+
+            })
+        })
+    }
+}
+
+
+function getProductsNeed() {
+
+    return (dispatch: any) => {
+        dispatch({
+            type: productConstants.GET_PRODUCTS_N_REQUEST,
+        })
+
+        return sendRequest({
+            method: 'GET',
+            url: `/product/getproductsneed/`,
+
+        }).then(product => {
+
+            dispatch({
+                type: productConstants.GET_PRODUCTS_N_SUCCESS,
+                product
+            })
+
+        }, ({ response }) => {
+            dispatch({
+                type: productConstants.GET_PRODUCTS_N_FAILURE,
                 error: (response != undefined && response != null) ? response.data.message : "somthing wrong"
 
             })

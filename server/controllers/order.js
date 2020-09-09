@@ -5,7 +5,7 @@ const _response = require('../_helpers/_response')
 
 exports.makeOrder = (req, res, next) => {
 
-    const { giveBy, giveTo, Qty, orderedChilds } = req.body;
+    
 
     const d = new Date();
     const date = d.getDate();
@@ -19,6 +19,10 @@ exports.makeOrder = (req, res, next) => {
     const { giveBy, giveTo, orderedChilds } = req.body;
     const addAtDay = dateStr;
     const addAtTime = timeNow;
+
+    console.log( req.body)
+
+   
     removeProductQty(orderedChilds)
 
     const QUERY = `
@@ -51,14 +55,15 @@ exports.makeOrder = (req, res, next) => {
 
 
 
-async function removeProductQty(orderedChilds) {
+ function removeProductQty(orderedChilds) {
+ 
 
-
-    await orderedChilds.forEach(element => {
+   JSON.parse(orderedChilds).forEach(element => {
+     console.log(element)
         const QUERY = ` 
         UPDATE product SET
-        productQty='productQty - ${element.qty}',
-        nbrRemove='nbrRemove + element.qty '
+        productQty=productQty - '${element.productQty}',
+        nbrRemove=nbrRemove +'${element.productQty}'
         WHERE
         productId ='${element.productId}'
         `;

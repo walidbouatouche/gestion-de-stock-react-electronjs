@@ -1,0 +1,13 @@
+export const orderConstants = {
+
+    ADD_ORDER_REQUEST: 'ADD_ORDER_REQUEST',
+    ADD_ORDER_SUCCESS: ' ADD_ORDER_SUCCESS',
+    ADD_ORDER_FAILURE: '   ADD_ORDER_FAILURE',
+
+
+
+
+
+}
+
+

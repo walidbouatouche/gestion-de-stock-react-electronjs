@@ -89,6 +89,25 @@ export function product(state = {}, action: any) {
                 ...state,
                 error: action.error
             }
+
+            case productConstants.GET_PRODUCTS_N_REQUEST:
+                return {
+                    ...state,
+                    loading: true
+                };
+    
+            case productConstants.GET_PRODUCTS_N_SUCCESS:
+                return {
+                    ...state,
+                    productsNeed: action.product.data
+                }
+    
+            case productConstants.GET_PRODUCTS_N_FAILURE:
+                return {
+                    ...state,
+                    error: action.error
+                }
+
         default:
             return state;
     }
