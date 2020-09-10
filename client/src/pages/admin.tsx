@@ -20,6 +20,7 @@ const ProductAdmin = () => {
     const products = useSelector((state: any) => state.product.products);
     const error = useSelector((state: any) => state.product.error);
     const dispatch = useDispatch();
+ 
 
     useEffect(() => {
         /*  
@@ -29,7 +30,7 @@ const ProductAdmin = () => {
 
         dispatch(productAction.getProducts())
 
-
+    
 
     }, [])
     const _addProduct = (productData: any) => {
@@ -61,10 +62,7 @@ const ProductAdmin = () => {
     return (
         <div  >
             <Layout>
-
-
-
-
+ 
                 {products && <ProductList editProduct={_editProduct} deleteProduct={_deleteProduct} addProduct={_addProduct} allProducts={products} />
                 }
 
@@ -97,11 +95,11 @@ const ProductList = ({ allProducts, deleteProduct, addProduct, editProduct }: an
     }
     const printProducts = () => {
         var divToPrint = document.getElementById("printTable") as HTMLInputElement;
-      
+
         window.document.write(divToPrint.outerHTML);
         window.print();
         window.location.reload()
- 
+
     }
 
     return (<>
@@ -113,14 +111,14 @@ const ProductList = ({ allProducts, deleteProduct, addProduct, editProduct }: an
                     <AddEditForm getProductInfo={_getProductInfo} />
                 </Model>
             </p>
-            <table className="w3-table-all w3-width w3-margin-top ">
+            <table style={{ border: "1px solid black" }} className="w3-table-all w3-width w3-margin-top ">
 
                 <thead>
-                    <tr className="w3-red w3-text-white">
-                        <th> product</th>
-                        <th>Edit</th>
-                        <th> Remove</th>
-                        <th> quantité</th>
+                    <tr  style={{ border: "1px solid black" }} className="w3-red w3-text-white">
+                        <th style={{ border: "1px solid black" }} > product</th>
+                        <th style={{ border: "1px solid black" }} >Edit</th>
+                        <th style={{ border: "1px solid black" }} > Remove</th>
+                        <th style={{ border: "1px solid black" }} > quantité</th>
                     </tr>
                 </thead>
 
@@ -128,8 +126,8 @@ const ProductList = ({ allProducts, deleteProduct, addProduct, editProduct }: an
                 <tbody>
                     {allProducts.map((item: any) =>
                         <tr key={item.productId} >
-                            <th>{item.productName}</th>
-                            <th  >
+                            <th style={{ border: "1px solid black" }} >{item.productName}</th>
+                            <th  style={{ border: "1px solid black" }} >
                                 <Model id={item.productId} title={<FontAwesomeIcon icon={faEdit} />}>
                                     {
 
@@ -141,60 +139,60 @@ const ProductList = ({ allProducts, deleteProduct, addProduct, editProduct }: an
 
 
                             </th>
-                            <th onClick={() => _deleteProduct(item.productId)} ><FontAwesomeIcon icon={faTrash} /></th>
+                            <th  style={{ border: "1px solid black" }} onClick={() => _deleteProduct(item.productId)} ><FontAwesomeIcon icon={faTrash} /></th>
 
                             {
                                 // when click we copy direct  the users in model below 
                             }
-                            <th>
-                                <th>{item.productQty}</th>
+  
+                                <th style={{ border: "1px solid black" }} >{item.productQty}</th>
 
-                            </th>
+                           
 
                         </tr>
                     )}
                 </tbody>
             </table>
 
- { 
- // only for print
+            {
+                // only for print
 
- }
-            <table    id="printTable" style={{border:"1px solid black"}}  className=" w3-hide">
-  <p >
-La listes des produis  
+            }
+            <table id="printTable" style={{ border: "1px solid black" }} className=" w3-hide">
+                <p >
+                    La listes des produis
   </p>
-<thead>
-    <tr style={{border:"1px solid black"}}   >
-        <th  style={{border:"1px solid black"}}>  product</th>
-     
-        <th  style={{border:"1px solid black"}}> quantité</th>
-    </tr>
-</thead>
+                <thead>
+                    <tr style={{ border: "1px solid black" }}   >
+                        <th style={{ border: "1px solid black" }}>  product</th>
+
+                        <th style={{ border: "1px solid black" }}> quantité</th>
+                    </tr>
+                </thead>
 
 
-<tbody>
-    {allProducts.map((item: any) =>
-        <tr  style={{border:"1px solid black"}}  key={item.productId} >
-            <th  style={{border:"1px solid black"}}>{item.productName}</th>
-       
-          
-                <th  style={{border:"1px solid black"}}>{item.productQty}</th>
+                <tbody>
+                    {allProducts.map((item: any) =>
+                        <tr style={{ border: "1px solid black" }} key={item.productId} >
+                            <th style={{ border: "1px solid black" }}>{item.productName}</th>
 
-         
 
-        </tr>
-    )}
-</tbody>
-</table>
-{ 
- // only for print
+                            <th style={{ border: "1px solid black" }}>{item.productQty}</th>
 
- }
-<br />
+
+
+                        </tr>
+                    )}
+                </tbody>
+            </table>
+            {
+                // only for print
+
+            }
+            <br />
             <button onClick={printProducts} className="w3-button w3-green "><FontAwesomeIcon icon={faPrint} /> </button>
         </div>
- 
+
     </>)
 }
 
@@ -211,9 +209,9 @@ const AddEditForm = ({ productInfo, getProductInfo }: any) => {
                 <Formik
                     enableReinitialize
                     initialValues={{
-                        productId: productInfo?.productId || '',
-                        title: productInfo?.productName || '',
-                        description: productInfo?.description || '',
+                        productId: productInfo?.productId || '..',
+                        title: productInfo?.productName || '...',
+                        description: productInfo?.description || '..',
                         Qty: 0
 
 
@@ -272,7 +270,7 @@ const AddEditForm = ({ productInfo, getProductInfo }: any) => {
 
 
                             <div >
-                                <button type="submit" className="w3-button w3-orange w3-text-white" >Save</button>
+                                <button type="submit" className="w3-button w3-red w3-text-white" >Save</button>
                                 <button type="reset" className="w3-button w3-gray w3-margin w3-text-white">Reset</button>
                             </div>
 

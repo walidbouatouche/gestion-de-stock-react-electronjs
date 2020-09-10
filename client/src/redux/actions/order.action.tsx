@@ -1,19 +1,20 @@
 import sendRequest from '../../helpers/sendRequest'
-import {  orderConstants } from '../constants/order.constants'
+import { orderConstants } from '../constants/order.constants'
 
 export const orderAction = {
 
-    addOrder
-  
+    addOrder ,
+    getOrders
+
 
 }
 
- 
+
 function addOrder(data: any) {
 
     return (dispatch: any) => {
         dispatch({
-            type:orderConstants.ADD_ORDER_REQUEST,
+            type: orderConstants.ADD_ORDER_REQUEST,
         })
 
         return sendRequest({
@@ -23,9 +24,10 @@ function addOrder(data: any) {
 
         }).then(() => {
 
-        dispatch({ type: orderConstants.ADD_ORDER_SUCCESS,
-        
-        })
+            dispatch({
+                type: orderConstants.ADD_ORDER_SUCCESS,
+
+            })
 
         }, ({ response }) => {
             dispatch({
@@ -36,4 +38,31 @@ function addOrder(data: any) {
         })
     }
 }
- 
+
+function getOrders() {
+
+    return (dispatch: any) => {
+        dispatch({
+            type: orderConstants.GET_ORDERS_REQUEST,
+        })
+
+        return sendRequest({
+            method: 'GET',
+            url: `/order/getorders/`,
+
+        }).then(orders => {
+
+            dispatch({
+                type: orderConstants.GET_ORDERS_SUCCESS,
+                orders
+            })
+
+        }, ({ response }) => {
+            dispatch({
+                type: orderConstants.GET_ORDERS_FAILURE,
+                error: (response != undefined && response != null) ? response.data.message : "somthing wrong"
+
+            })
+        })
+    }
+}

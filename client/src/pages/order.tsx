@@ -291,13 +291,13 @@ Choisez quantité
 <button onClick={addItem} className="w3-margin w3-padding"  > Add </button>
  
 <hr/>
-        <table className="w3-table-all w3-width w3-margin-top ">
+        <table  style={{ border: "1px solid black" }} className="w3-table-all w3-width w3-margin-top ">
 
             <thead>
                 <tr className="w3-red w3-text-white">
-                    <th> product</th>
-                    <th> quantité</th>
-                    <th> Delete</th>
+                    <th style={{ border: "1px solid black" }} > product</th>
+                    <th style={{ border: "1px solid black" }} > quantité</th>
+                    <th style={{ border: "1px solid black" }} > Delete</th>
                 </tr>
             </thead>
 
@@ -305,12 +305,12 @@ Choisez quantité
             <tbody>
                 {orderListItems.map((item: any) =>
                     <tr key={item.productId} >
-                        <th>{item.productName}</th>
+                        <th style={{ border: "1px solid black" }}  >{item.productName}</th>
                       
-                        <th >
+                        <th style={{ border: "1px solid black" }} >
                             {item.productQty}
                         </th>
-                        <th onClick={()=>removeItem(item.productId)}> <FontAwesomeIcon icon={faTrash} /></th>
+                        <th  style={{ border: "1px solid black" }} onClick={()=>removeItem(item.productId)}> <FontAwesomeIcon icon={faTrash} /></th>
 
                     </tr>
                 )}

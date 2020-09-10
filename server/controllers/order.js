@@ -79,3 +79,17 @@ exports.makeOrder = (req, res, next) => {
 
 
 }
+
+
+
+
+
+exports.getOrders = (req, res, next) => {
+
+
+  const QUERY = `SELECT * FROM  ordered ORDER BY   orderedId DESC`
+  CON.query(QUERY, (err, result) => {
+      if (err) _response(res, 401, { message: 'invalidRequest' });
+      _response(res, 200, result)
+  })
+}

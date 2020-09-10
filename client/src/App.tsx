@@ -6,6 +6,7 @@ import { Provider } from 'react-redux'
 import { ProductAdmin } from './pages/admin'
 import {Order} from './pages/order'
 import Need from './pages/need'
+import Orders from './pages/orders'
 const App = () => {
 
   return (
@@ -17,6 +18,7 @@ const App = () => {
         <Route path="/admin" exact component={ProductAdmin} />
         <Route path="/order" exact component={Order} />
         <Route path="/need" exact component={Need} />
+        <Route path="/orders" exact component={Orders} />
         <Redirect to="/" />
       </Switch>
     </Router>

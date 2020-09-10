@@ -6,7 +6,7 @@ require('./config/sql.config')
 
 const productRoute = require('./routes/product')
 const orderRoute = require('./routes/order')
-// const userRoute = require('./routes/user')
+const userRoute = require('./routes/user')
 
 app.use(cors())
 
@@ -17,7 +17,7 @@ app.use(bodyParser.json()); //https://stackoverflow.com/questions/38306569/what-
 app.use('/product', productRoute)
 
 app.use('/order/', orderRoute)
-// app.use('/user', userRoute)
+ app.use('/user', userRoute)
 
 
 
