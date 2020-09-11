@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { productAction } from '../redux/actions/product.action';
 import { orderAction} from '../redux/actions/order.action';
 import { useSelector, useDispatch } from 'react-redux'
+import { userAction } from '../redux/actions/user.action';
 const Order = () => {
    
 
@@ -12,14 +13,16 @@ const Order = () => {
     const [orderList, setOrderList] = useState([{}])
     const [currentProduct, setCurrentProduct] = useState({})
     const [selectedQty, setSelectedQty] = useState(0)
-    const [giveBy, setGiveBy] = useState('')
+    const [giveBy, setGiveBy] = useState('Societé:"magasin"')
     const [ giveTo,setGiveTo] = useState('')
     const [ today,setToday] = useState('')
     const loading = useSelector((state: any) => state.product.loading);
     const products = useSelector((state: any) => state.product.products);
     const error = useSelector((state: any) => state.product.error);
-    const dispatch = useDispatch();
     const orderAdded = useSelector((state: any) => state.order.orderAdded);
+    const users = useSelector((state: any) => state.user.users);
+
+    const dispatch = useDispatch();
 
 
     useEffect(()=>{
@@ -38,6 +41,8 @@ const Order = () => {
         setOrderList(newOrderList)
         
         // just for resolve bug 
+
+        dispatch(userAction.getUsers())
 
     },[])
 
@@ -158,11 +163,11 @@ const printOrder=()=>{
                       _getGiveBy={getGiveBy}
                       _getGiveTo={getGiveTo}
                       _getSelectedQty={ getSelectedQty}
-                      
+                      users={users}
 
                       />}
  
-                      <button  onClick={printOrder}className="w3-button w3-green ">  <FontAwesomeIcon icon={faPrint} /></button>
+                      <button  onClick={printOrder}className="w3-button w3-red ">  <FontAwesomeIcon icon={faPrint} /></button>
 
 
         </Layout>
@@ -207,7 +212,7 @@ const printOrder=()=>{
 }
 
 
-const OrderList = ({ _getSelectedQty,_getGiveBy, _getGiveTo,_getCurrentProduct,allProducts ,orderListItems ,_addItem ,_removeItem ,_makeOrder}: any) => {
+const OrderList = ({ users, _getSelectedQty,_getGiveBy, _getGiveTo,_getCurrentProduct,allProducts ,orderListItems ,_addItem ,_removeItem ,_makeOrder}: any) => {
 
 
     const addItem=()=>{
@@ -247,9 +252,14 @@ Donne a :
 <option>
 ------
     </option>
-    <option  value={"user"} >
-        user
-    </option>
+   
+    {users && users.map((item: any) =>
+     <option   key={item.userId} value={item.name} >
+       {       item.name}
+                       
+                        </option>
+                )}
+ 
  
     
      </select>  
@@ -260,12 +270,10 @@ Donne a :
         <div style={{float:"right"}}>
         Par :  
      
-   <select onChange={getGiveBy} >
-   <option>
-------
-    </option>
+   <select disabled={true} onChange={getGiveBy} >
+
         <option value={"admin"}>
-        admin
+        Societé:"magasin"
     </option>
    
 
@@ -319,7 +327,7 @@ Choisez quantité
 
 <div className="w3-center">
     <br />
-<button  onClick={makeOrder} className="w3-button w3-green ">  <FontAwesomeIcon icon={faSave} /></button>
+<button  onClick={makeOrder} className="w3-button w3-red ">  <FontAwesomeIcon icon={faSave} /></button>
 
     </div>
 

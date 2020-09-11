@@ -7,6 +7,7 @@ import { ProductAdmin } from './pages/admin'
 import {Order} from './pages/order'
 import Need from './pages/need'
 import Orders from './pages/orders'
+import User from './pages/user'
 const App = () => {
 
   return (
@@ -19,6 +20,7 @@ const App = () => {
         <Route path="/order" exact component={Order} />
         <Route path="/need" exact component={Need} />
         <Route path="/orders" exact component={Orders} />
+        <Route path="/user" exact component={User} />
         <Redirect to="/" />
       </Switch>
     </Router>

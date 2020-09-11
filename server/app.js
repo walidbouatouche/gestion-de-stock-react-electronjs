@@ -17,7 +17,7 @@ app.use(bodyParser.json()); //https://stackoverflow.com/questions/38306569/what-
 app.use('/product', productRoute)
 
 app.use('/order/', orderRoute)
- app.use('/user', userRoute)
+app.use('/user', userRoute)
 
 
 

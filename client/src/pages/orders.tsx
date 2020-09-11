@@ -45,10 +45,11 @@ const Orders = () => {
 
             <thead>
                 <tr style={{ border: "1px solid black" }} className="w3-red w3-text-white">
-                    <th>ref</th>
-                    <th> a:</th>
-                    <th> par:</th>
-                    <th> plus</th>
+                    <th>Ref</th>
+                    <th> A</th>
+                    <th> Par</th>
+                    <th> Vu</th>
+                    <th>x</th>
                 </tr>
             </thead>
 
@@ -88,7 +89,7 @@ const Orders = () => {
             <th style={{ border: "1px solid black" }} >
                 {item.productQty}
             </th>
- 
+
         </tr>
     )}
 </tbody>
@@ -103,6 +104,8 @@ const Orders = () => {
 </div>
                             </Model>
                         </th>
+                        <th style={{ border: "1px solid black" }}  ><FontAwesomeIcon icon={faTrash} /> </th>
+
                     </tr>
                 )}
             </tbody>

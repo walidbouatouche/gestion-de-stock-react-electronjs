@@ -56,7 +56,8 @@ return(<Layout>
     )}
 </tbody>
 </table>
-<button  id="print" onClick={printList} className="w3-button w3-orange">Imprimer la liste</button>
+<br/>
+<button  id="print" onClick={printList} className="w3-button w3-red">Imprimer la liste</button>
 </Layout>
 )
 

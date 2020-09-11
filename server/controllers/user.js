@@ -6,7 +6,7 @@ const _response = require('../_helpers/_response')
 
 exports.getUsers = (req, res, next) => {
 
-    const QUERY = `SELECT * FROM user `
+    const QUERY = `SELECT * FROM users `
     CON.query(QUERY, (err, result) => {
         if (err) _response(res, 401, { message: 'invalidRequest' });
         _response(res, 200, result)
