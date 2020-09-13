@@ -40,6 +40,23 @@ export function order(state = {}, action: any) {
                 error: action.error
             }
 
+        case orderConstants.DELETE_ORDER_REQUEST:
+            return {
+                ...state,
+                loading: true
+            };
+
+        case orderConstants.DELETE_ORDER_SUCCESS:
+            return {
+                ...state,
+                orderDeleted: true
+            }
+
+        case orderConstants.DELETE_ORDER_FAILURE:
+            return {
+                ...state,
+                error: action.error
+            }
         default:
             return state;
     }

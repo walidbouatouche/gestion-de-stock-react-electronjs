@@ -106,15 +106,16 @@ exports.deleteOrder = (req, res, next) => {
 
   const { order_orderedChilds } = req.params;
 
-  const _order_orderedChilds = JSON.parse(_order_orderedChilds)
+  const _order_orderedChilds = JSON.parse(order_orderedChilds)
 
+ console.log(_order_orderedChilds)
 
-  recieveProductQty(_order_orderedChilds.orderedChilds)
+   recieveProductQty(_order_orderedChilds.childs)
 
   const QUERY = `
  delete
- from 
-  where orderedId='${_order_orderedChilds.orderedId}'
+ from ordered
+  where orderedId='${_order_orderedChilds._orderedId}'
   
   `;
 

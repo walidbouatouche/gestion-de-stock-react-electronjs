@@ -28,7 +28,7 @@ const NeedProduct=()=>{
         let modelBox = document.getElementById("print") as HTMLInputElement;
         modelBox.style.display = "none"
         window.print();
-        window.location.reload()
+        window.location.reload(false)
  
 
 

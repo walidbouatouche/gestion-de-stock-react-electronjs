@@ -17,7 +17,7 @@ const Model = ({ title, children, id }: any) => {
         <div id={id} className="w3-modal w3-border">
             <div style={{ borderRadius: "10px" }} className="w3-modal-content">
                 <div className="w3-container w3-padding">
-                    <span style={{height:"40px" ,marginRight: "10px", borderRadius: "10px", bottom: "20px", marginTop: "10px" }} onClick={hideModel} className="w3-button w3-display-topright w3-red ">&times;</span>
+                    <span style={{height:"40px" ,marginRight: "10px", borderRadius: "10px", bottom: "20px", marginTop: "10px" }} onClick={hideModel} className="w3-button w3-display-topright w3-red  noPrint">&times;</span>
                     <br />
                     {children}
                 </div>

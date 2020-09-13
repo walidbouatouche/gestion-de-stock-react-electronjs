@@ -27,6 +27,14 @@ const Order = () => {
 
     useEffect(()=>{
 
+        const d = new Date();
+        const date = d.getDate();
+        const month = d.getMonth() + 1; // Since getMonth() returns month from 0-11 not 1-12
+        const year = d.getFullYear();
+         
+        const dateStr = date + "/" + month + "/" + year;
+    
+        setToday(dateStr)
 
         dispatch(productAction.getProducts())
 
@@ -104,14 +112,7 @@ const getCurrentProduct=(product:any)=>{
   
 }
 const makeOrder=()=>{
-    const d = new Date();
-    const date = d.getDate();
-    const month = d.getMonth() + 1; // Since getMonth() returns month from 0-11 not 1-12
-    const year = d.getFullYear();
-     
-    const dateStr = date + "/" + month + "/" + year;
-
-    setToday(dateStr)
+  
 const orderedChilds=JSON.stringify(orderList) ;
   
     if(window.confirm("Vous Êtes-vous sûr")){
@@ -139,11 +140,19 @@ const getSelectedQty=(qty:any)=>{
 
 const printOrder=()=>{
 
-    var divToPrint = document.getElementById("printTable") as HTMLInputElement;
-      
-    window.document.write(divToPrint.outerHTML);
+
+    [].forEach.call(document.querySelectorAll('.noPrint'), (el:any)=> {
+        el.style.visibility = 'hidden';
+      });
+
+      let head = document.getElementById("head") as HTMLInputElement;
+    head.style.display = "none"
     window.print();
-    window.location.reload()
+    [].forEach.call(document.querySelectorAll('.noPrint'), (el:any)=> {
+        el.style.visibility = 'visible';
+      });
+  
+      head.style.display = "block"
 
 }
     return (<div >
@@ -164,55 +173,21 @@ const printOrder=()=>{
                       _getGiveTo={getGiveTo}
                       _getSelectedQty={ getSelectedQty}
                       users={users}
+                      today={today}
 
                       />}
  
-                      <button  onClick={printOrder}className="w3-button w3-red ">  <FontAwesomeIcon icon={faPrint} /></button>
+                      <button  onClick={printOrder}className="w3-button w3-red  noPrint">  <FontAwesomeIcon icon={faPrint} /></button>
 
 
         </Layout>
-        { // just for print order
-        
-        }
-        <div  id="printTable" style={{border:"1px solid black"}} className=" w3-hide">
-        <table    style={{marginRight:"auto",marginLeft:"auto",border:"1px solid black"}} >
-  <p style={{marginRight:"auto",marginLeft:"auto"}} >
-<h1 style={{padding:"20px" , border:"2px solid dotted",marginRight:"auto",marginLeft:"auto"}}> Bon commande </h1>
-  </p>
-<thead>
-    <tr style={{border:"1px solid black"}}   >
-        <th  style={{border:"1px solid black"}}>  Product</th>
-     
-        <th  style={{border:"1px solid black"}}> Quantité</th>
-    </tr>
-</thead>
-<tbody>
-    {orderList && orderList.map((item: any) =>
-        <tr  style={{border:"1px solid black"}}  key={item.productId} >
-            <th  style={{border:"1px solid black"}}>{item.productName}</th>
-       
           
-                <th  style={{border:"1px solid black"}}>{item.productQty}</th>
-
-         
-
-        </tr>
-    )}
-</tbody>
-        par:<b>{giveBy}</b>
-        <br  />
-       a:<b>{giveTo}</b>
-       <br />
-       le :<b>{today} </b>
-</table>
-<br />
-</div> 
     </div>)
 
 }
 
 
-const OrderList = ({ users, _getSelectedQty,_getGiveBy, _getGiveTo,_getCurrentProduct,allProducts ,orderListItems ,_addItem ,_removeItem ,_makeOrder}: any) => {
+const OrderList = ({ today,users, _getSelectedQty,_getGiveBy, _getGiveTo,_getCurrentProduct,allProducts ,orderListItems ,_addItem ,_removeItem ,_makeOrder}: any) => {
 
 
     const addItem=()=>{
@@ -245,6 +220,9 @@ const getGiveBy=(event:any)=>{
     _getSelectedQty(event.target.value)
     }
     return (<div>
+           <p className="w3-buttom">
+{today}
+    </p>
 <br />
 Donne a : 
 
@@ -281,9 +259,13 @@ Donne a :
 
         </div>
 <hr/>
+<div id="head">
+
+
+<p className="noPrint">
 Choisez le produit:
- 
-<select  onChange={getCurrentProduct}>
+    </p>
+<select  className="noPrint"  onChange={getCurrentProduct}>
 <option>
 ------
     </option>
@@ -294,18 +276,21 @@ Choisez le produit:
 
               }     
     </select>
+<p className="noPrint">
 Choisez quantité
-<input type="number" onChange={getSelectedQty}  />
-<button onClick={addItem} className="w3-margin w3-padding"  > Add </button>
+    </p>
+<input className="noPrint"  type="number" onChange={getSelectedQty}  />
+<button   onClick={addItem} className="w3-margin w3-padding noPrint"  > Add </button>
  
 <hr/>
+</div>
         <table  style={{ border: "1px solid black" }} className="w3-table-all w3-width w3-margin-top ">
 
             <thead>
                 <tr className="w3-red w3-text-white">
                     <th style={{ border: "1px solid black" }} > product</th>
                     <th style={{ border: "1px solid black" }} > quantité</th>
-                    <th style={{ border: "1px solid black" }} > Delete</th>
+                    <th  className="noPrint" style={{ border: "1px solid black" }} > Delete</th>
                 </tr>
             </thead>
 
@@ -318,7 +303,7 @@ Choisez quantité
                         <th style={{ border: "1px solid black" }} >
                             {item.productQty}
                         </th>
-                        <th  style={{ border: "1px solid black" }} onClick={()=>removeItem(item.productId)}> <FontAwesomeIcon icon={faTrash} /></th>
+                        <th  className="noPrint"  style={{ border: "1px solid black" }} onClick={()=>removeItem(item.productId)}> <FontAwesomeIcon icon={faTrash} /></th>
 
                     </tr>
                 )}
@@ -327,10 +312,10 @@ Choisez quantité
 
 <div className="w3-center">
     <br />
-<button  onClick={makeOrder} className="w3-button w3-red ">  <FontAwesomeIcon icon={faSave} /></button>
+<button    onClick={makeOrder} className="w3-button w3-red noPrint">  <FontAwesomeIcon icon={faSave} /></button>
 
     </div>
-
+ 
     </div>)
 
 }

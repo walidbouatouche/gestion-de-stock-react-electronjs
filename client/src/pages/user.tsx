@@ -38,8 +38,7 @@ const User = () => {
                 <tr style={{ border: "1px solid black" }} className="w3-red w3-text-white">
                 <th>Ref</th>
                     <th>Name</th>
-                    <th>List commande</th>
-                   
+                    
                 </tr>
             </thead>
 
@@ -50,8 +49,7 @@ const User = () => {
                     <tr style={{ border: "1px solid black" }} key={item.userId} >
                         <th>{item.userId}</th>
                         <th>{item.name}</th>
-                        <th>  <FontAwesomeIcon icon={faBook} /></th>
-                 
+                  
                        
  
                     </tr>

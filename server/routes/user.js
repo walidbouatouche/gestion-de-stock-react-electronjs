@@ -3,6 +3,6 @@ const ROUTER = EXPRESS.Router();
  
 const userCtrl = require('../controllers/user')
 
-ROUTER.get('/getproductbyid/:productId',userCtrl.getUsers)
+ROUTER.get('/getusers/',userCtrl.getUsers)
 
 module.exports = ROUTER;
